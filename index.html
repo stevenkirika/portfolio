@@ -7,18 +7,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/component.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="js/modernizr.custom.js"></script>
+  <script src="js/selectivizr-min.js"></script>  
+  <script src="js/jquery.dlmenu.js"></script> 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.1.0/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+           emailjs.init("user_0hKn7m5Y8ffWTV7glQAEg");
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                $('#sending-form').fadeIn(4000);
+                $('#sending-form').removeClass('d-none');
+                this.contact_number.value = Math.random() * 100000 | 0;
+
+                emailjs.sendForm('yahoo', 'template_7eR7zVOp', this).then(function(response) {
+                	$("#from_name").val('');
+                	$("#user_email").val('');
+                	$("#message_html").val('');
+                	$('#success').fadeIn(5000);
+                	$('#success').removeClass('d-none');
+                	$('#success').fadeOut(9000);
+				   console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
+				}, function(err) {
+					$('#danger').fadeIn(5000);
+					$('#danger').removeClass('d-none');
+                	$('#danger').fadeOut(9000);
+				   console.log("FAILED. error=", err);
+				});
+				$('#sending-form').fadeOut(7000);
+            });
+        }
+    </script>
 </head>
 <body>
 
 <div class="container site-main">
+	          <div id= "dl-menu" class="dl-menuwrapper">
+						<button class="dl-trigger">Open Menu</button> 
+                        <!--<img src="images/clickhere.png" alt="" /> -->
+						<ul class="dl-menu">
+							<li><a href="#aboutme">About Me</a> </li>
+							<li><a href="#education">Education</a></li>
+                            <li><a href="#projects">Project Sample</a></li>        
+                            <li><a href="#contacts">Contact Me</a></li>
+						 </ul>
+					</div><!-- /dl-menuwrapper -->
 	<header>
 		<div class="row">
 			<div class="col-md-12">
 				 <h1 class="h1_title_name">Steven Kirika</h1> 
                  <p class="p_title_name">Web / Software  Designer &amp; Developer</p>
+                 <center>
+			      <div class="button1">
+			      <a href="img/cv.pdf" target="_blank">Download Resume</a>
+			      <p class="top p">click to begin</p>
+			      <p class="bottom p">173 KB .docx</p>
+			      </div>
+                 </center>
 			</div>
 		</div>
 	</header>
@@ -52,7 +105,7 @@
 		
 	</section>
 	<div class="top-divider"></div>
-	<section style="padding: 5px 0;">
+	<section id="education" style="padding: 5px 0;">
 		<div class="row">
 			<div class="col-md-6">
 				 <h1 class="personal_h1"><i class="icon2-education"></i>Education</h1>
@@ -84,86 +137,219 @@
 		</div>
 	</section>
 	<div class="top-divider"></div>
-	<section style="padding: 5px 0;">
+	<section id="projects" style="padding: 5px 0;">
 		<div class="row">
 				<div class="col-md-12">
-		        <h1 class="personal_h1"><i class="icon2-watch"></i>Work Samples</h1>
+		        <h1 class="personal_h1"><i class="icon2-watch"></i>Project Samples</h1>
+
 		       </div>
 		</div>
-		<div class="row masonry-container">
+		<div class="button-group filters-button-group">
+		  <button class="button is-checked" data-filter="*">show all</button>
+		  <button class="button" data-filter=".wordpress">Wordpress</button>
+		  <button class="button" data-filter=".joomla">Joomla</button>
+		  <button class="button" data-filter=".ecommerce">Ecommerce</button>
+		  <button class="button" data-filter=".laravel">Laravel</button>
+		  <button class="button" data-filter=".php">PHP</button>
+		  <button class="button" data-filter=".ajax">AJAX/JSON</button>
+		  <button class="button" data-filter=".vb-net">VB.NET</button>
+		</div>
+		<div id="parent" class="row masonry-container">
 
-				<div class="col-lg-3 col-md-3 col-xs-6">
+				<div class="col-lg-3 col-md-3 col-xs-6 wordpress ecommerce">
 		          <a class="d-block mb-4 h-100" href="http://www.panini.co.ke"  data-toggle="tooltip"  title="Ecommerce - Panini Restaurant Restaurant - www.panini.co.ke" target="_blank">
 		            <img class="img-fluid img-thumbnail" src="img/work/panini.jpg" alt="Panini Restaurant Restaurant">
 		          </a>
 		        </div>
 
-		        <div class="col-lg-3 col-md-3 col-xs-6">
+		        <div class="col-lg-3 col-md-3 col-xs-6 wordpress">
 		          <a class="d-block mb-4 h-100" href="http://www.andy.or.ke" data-toggle="tooltip"  title="Wordpress CMS - Action Network For the Disabled - www.andy.or.ke" target="_blank">
 		            <img class="img-fluid img-thumbnail" src="img/work/andy.jpg" alt="Action Network For the Disabled">
 		          </a>
 		        </div>
-		        <div class="col-lg-3 col-md-3 col-xs-6">
+		        <div class="col-lg-3 col-md-3 col-xs-6 wordpress">
 		          <a class="d-block mb-4 h-100" href="http://www.blazeconsulting.co.ke" data-toggle="tooltip"  title="Wordpress CMS - Blaze Consulting - www.blazeconsulting.co.ke" target="_blank">
 		            <img class="img-fluid img-thumbnail" src="img/work/Blazeconsulting.jpg" alt="Blaze Consulting">
 		          </a>
 		        </div>
 
-		        <div class="col-lg-3 col-md-3 col-xs-6">
+		        <div class="col-lg-3 col-md-3 col-xs-6 joomla">
 		          <a class="d-block mb-4 h-100" href="http://www.farmbizafrica.com" data-toggle="tooltip"  title="Joomla CMS - Farmbiz Africa - www.farmbizafrica.com" target="_blank">
 		            <img class="img-fluid img-thumbnail" src="img/work/farmbizAfrica.jpg" alt="Farmbiz Africa">
 		          </a>
 		        </div>
-		         <div class="col-lg-3 col-md-3 col-xs-6">
+		         <div class="col-lg-3 col-md-3 col-xs-6 wordpress ecommerce">
 		          <a class="d-block mb-4 h-100" href="http://www.lit.co.ke" data-toggle="tooltip"  title="Ecommerce - Living Images Technologies - www.lit.co.ke" target="_blank">
 		            <img class="img-fluid img-thumbnail" src="img/work/lit.jpg" alt="Living Images Technologies">
 		          </a>
 		        </div>
 
-		        <div class="col-lg-3 col-md-3 col-xs-6">
+		        <div class="col-lg-3 col-md-3 col-xs-6 wordpress">
 		          <a class="d-block mb-4 h-100" href="http://beyondglamourafrica.com/" data-toggle="tooltip"  title="Wordpress CMS - Beyond Glamour Africa - www.beyondglamourafrica.com" target="_blank">
 		            <img class="img-fluid img-thumbnail" src="img/work/bga.jpg" alt="Beyond Glamour Africa">
 		          </a>
 		        </div>
 
-		          <div class="col-lg-3 col-md-3 col-xs-6">
+		          <div class="col-lg-3 col-md-3 col-xs-6 wordpress">
 		          <a class="d-block mb-4 h-100" href="http://beyondglamourafrica.com/" data-toggle="tooltip"  title="Wordpress CMS - Joseph Kyule Photographer - www.josephkyulephotography.com" target="_blank">
 		            <img class="img-fluid img-thumbnail" src="img/work/josephkyule.jpg" alt="Joseph Kyule Photographer">
 		          </a>
 		        </div>
 
-		          <div class="col-lg-3 col-md-3 col-xs-6">
+		          <div class="col-lg-3 col-md-3 col-xs-6 wordpress">
 		          <a class="d-block mb-4 h-100" href="https://girlsinkenyakillingit.com/" data-toggle="tooltip"  title="Wordpress CMS - Girls In Kenya Killing It - www.girlsinkenyakillingit.com" target="_blank">
 		            <img class="img-fluid img-thumbnail" src="img/work/girls_in_kenya_killing.jpg" alt="Girls In Kenya Killing It">
 		          </a>
 		        </div>
 
-		         <div class="col-lg-3 col-md-3 col-xs-6">
+		         <div class="col-lg-3 col-md-3 col-xs-6 wordpress">
 		          <a class="d-block mb-4 h-100" href="https://raadvocates.co.ke/" data-toggle="tooltip"  title="Wordpress CMS - Rachael Advocates - www.raadvocates.co.ke" target="_blank">
 		            <img class="img-fluid img-thumbnail" src="img/work/raadvocates.jpg" alt="Rachael Advocates">
 		          </a>
 		        </div>
 
-		         <div class="col-lg-3 col-md-3 col-xs-6">
+		         <div class="col-lg-3 col-md-3 col-xs-6 wordpress" >
 		          <a class="d-block mb-4 h-100" href="http://www.jabelieducationcentre.com/" data-toggle="tooltip"  title="Wordpress CMS - Jabeli Education Center &amp; Adult Education - www.jabelieducationcentre.com" target="_blank">
 		            <img class="img-fluid img-thumbnail" src="img/work/jabeli_Education_Center_&_adult_education.jpg" alt="Jabeli Education Center &amp; Adult Education">
 		          </a>
 		        </div>
-			
-		</div>
+
+		        <div class="col-lg-3 col-md-3 col-xs-6 laravel php" >
+		          <a class="d-block mb-4 h-100" href="https://youtu.be/kW9UDz_Hais" data-toggle="tooltip"  title="LARAVEL PHP-Framework - Basic Setup" target="_blank">
+		            <img class="img-fluid img-thumbnail" src="img/work/Laravel-basic-setup.jpg" alt="LARAVEL PHP-Framework - Basic Setup">
+		          </a>
+		        </div>
+
+		         <div class="col-lg-3 col-md-3 col-xs-6 laravel php" >
+		          <a class="d-block mb-4 h-100" href="https://youtu.be/v_Bo15RNwX0" data-toggle="tooltip"  title="LARAVEL PHP-Framework - Authentication" target="_blank">
+		            <img class="img-fluid img-thumbnail" src="img/work/laravel-authenication.jpg" alt="LARAVEL PHP-Framework - Authentication">
+		          </a>
+		        </div>
+
+		        <div class="col-lg-3 col-md-3 col-xs-6 ajax php" >
+		          <a class="d-block mb-4 h-100" href="https://youtu.be/b8ANiz3ijEg" data-toggle="tooltip"  title="AJAX/JSON/MYSQL - Simple Chat" target="_blank">
+		            <img class="img-fluid img-thumbnail" src="img/work/ajax-json.jpg" alt="AJAX/JSON/MYSQL  - Simple Chat">
+		          </a>
+		        </div>
+
+		         <div class="col-lg-3 col-md-3 col-xs-6 wordpress" >
+		          <a class="d-block mb-4 h-100" href="http://tamashajointkaren.co.ke/" data-toggle="tooltip"  title="Wordpress CMS - Tamasha Joint Karen" target="_blank">
+		            <img class="img-fluid img-thumbnail" src="img/work/tamasha_joint.jpg" alt="Tamasha Joint Karen">
+		          </a>
+		        </div>
+
+		           <div class="col-lg-3 col-md-3 col-xs-6 vb-net" >
+		          <a class="d-block mb-4 h-100" href="https://github.com/stevenkirika/KRACalculator" data-toggle="tooltip"  title="KRACalculator(VB.NET) - Old Tax" target="_blank">
+		            <img class="img-fluid img-thumbnail" src="img/work/Compute_KRA.jpg" alt="KRACalculator(VB.NET) - Old Tax">
+		          </a>
+		        </div>
+	</div>	 
 	</section>
     <div class="top-divider"></div>
+    <section id="contacts">
+    <div class="row">
+    	<div class="col-md-12">
+    		   <h1 class="personal_h1"><i class="icon2-contact"></i> Contact Me</h1>
+    	</div>
+    </div>
+    <div class="row">
+    	<div class="col-md-5">
+    		<p>It would my pressure working with you. For any, programming training, new web application or website you would like to discuss with me please, do not hesitate to contact me.</p>
+    		<div class="data-list">
+				
+				 <h2><i class="icon-phone"></i>  Phone</h2>
+				 <ul><li>+254 786 922328</li></ul>
+				 
+				 <h2><i class="icon-email"></i> Email Address</h2>
+				 <ul><li>stevenkirika12@gmail.com</li></ul>  
+			</div>
+    	</div>
+    	<div class="col-md-7">
+    		<form id="contact-form" style="position: relative;">
+    			<div id="sending-form" class="sending-form d-none"></div>
+    			<input type="hidden" name="contact_number">
+    			<div class="form-group" >
+    				<input type="text"  id="from_name"  name="from_name" class="form-control" placeholder="Enter Your Names" required="">
+    			</div>
+    			<div class="form-group">
+    				<input type="email" id="user_email" name="user_email" class="form-control" placeholder="Enter Your Email" required="">
+    			</div>
+    			<div class="form-group">
+    				<textarea class="form-control" id="message_html" name="message_html" placeholder="Enter Your Message" required=""></textarea>
+    			</div>
+    			<div id="danger" class="alert alert-danger d-none">Sorry! your email was not send successfully, please try again or contact me by phone. Kind Regards </div>
+    			<div id="success" class="alert alert-success d-none">Your email was send successfully, I will be in touch as soon as possible. <br> Kind Regards </div>
+    			<input type="submit" class="button float-right" name="send_mail" value="SEND">
+    		</form>
+    	</div>
+    </div>
+    	
+    </section>
+    <div class="top-divider"></div>
+    <section><p align="center">2018 &copy; STEVEN KIRIKA NDEGWA</p></section>
 
 </div>
+
+<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.min.js"></script>
 <script type="text/javascript" src="js/jquery.masonry.min.js"></script>
+<script src='https://npmcdn.com/isotope-layout@3.0.6/dist/isotope.pkgd.js'></script>
 <script type="text/javascript">
 	$(function () {
+		 
+		    //hambuger menu
+            $( '#dl-menu' ).dlmenu();
+            $('#dl-menu a').click(function(e) {
+            $('#dl-menu').dlmenu('closeMenu'); 
+            });
+             $('#dl-menu li a').bind('click',function(event){
+                    var $anchor = $(this);
+                    
+                    $('html, body').stop().animate({
+                        scrollTop: $($anchor.attr('href')).offset().top
+                    }, 1500,'easeInOutExpo');
 
-  $('[data-toggle="tooltip"]').tooltip();
+                    event.preventDefault();
+                });
+            
+            //tooltip
+			$('[data-toggle="tooltip"]').tooltip();
 
-  $('.masonry-container').masonry({itemSelector: '.col-md-3'});
-})
+            // Main content container
+        	var $container = $('.masonry-container');
+        	// Masonry + ImagesLoaded
+        	$container.imagesLoaded(function(){
+            $container.masonry({itemSelector: '.col-md-3'});
+             });
+
+
+			// init Isotope
+			var $grid = $('#parent').isotope({
+			  itemSelector: '.col-lg-3',
+			  //layoutMode: 'fitRows'
+			});
+		
+			// bind filter button click
+			$('.filters-button-group').on( 'click', 'button', function() {
+			  var filterValue = $( this ).attr('data-filter');
+			  // use filterFn if matches value
+			  filterValue = filterValue;
+			  $grid.isotope({ filter: filterValue });
+			});
+			// change is-checked class on buttons
+			$('.button-group').each( function( i, buttonGroup ) {
+			  var $buttonGroup = $( buttonGroup );
+			  $buttonGroup.on( 'click', 'button', function() {
+			    $buttonGroup.find('.is-checked').removeClass('is-checked');
+			    $( this ).addClass('is-checked');
+			  });
+			});
+
+         
+
+});
 	
 </script>
+	
 </body>
 </html>
